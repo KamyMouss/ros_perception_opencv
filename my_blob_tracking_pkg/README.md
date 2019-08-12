@@ -5,12 +5,7 @@ We can use the package **cmvision** for blob tracking:
 
 ## Tracking color gui:
 
-    <arg name="image_topic" default="/mira/mira/camera1/image_raw"/>
-
-    <node name="color_gui_node" pkg="cmvision" type="colorgui" respawn="false"
-    output="screen">
-        <remap from="image" to="$(arg image_topic)"/>
-    </node>
+`rosrun cmvision colorgui image:=<image topic>`
 
 
 You have the RGB value of the color on average and then you have the YUV, which, in this case, is (30:82, 86:111, 178:252). Yours could be slightly different. But, the point is that this YUV defines the color blob to be tracked. This means that this is what MiraRobot will consider to be RedBall.
