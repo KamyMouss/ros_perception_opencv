@@ -2,7 +2,7 @@
 
 # Notes
 
-## Applying Filters to the Image
+## Steps for OpenCV Image Filtering
 
 The raw image is useless unless you filter it to only see the color you want to track, and you crop the parts of the image you are not interested in. This is to make your program faster.
 
@@ -45,3 +45,9 @@ These centroids are vital in blob tracking because they give you a precise point
 In image processing, computer vision and related fields, an image moment is a certain particular weighted average (moment) of the image pixels' intensities, or a function of such moments, usually chosen to have some attractive property or interpretation.
 
 Image moments are useful to describe objects after segmentation. Simple properties of the image which are found via image moments include area (or total intensity), its centroid, and information about its orientation.
+
+
+### PID controller with perception
+Controlling a robot means moving the robot based on the information provided by sensor data. Every time you work with perception for robots, you will have this coupling. So, you better start learning a little bit of control, so that you can make the most of your robot's perception.
+
+One way of controlling the movement of the robot a little better and making it smoother is to apply a PID controller to the control values. Luckily for us, there is a PID ROS package that makes using PIDs much easier.
