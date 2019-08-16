@@ -22,3 +22,58 @@ Of all the parameters you have here, the only ones that are relevant most of the
 This sets the correct image topics as inputs so that the recognition can be made
 
 And now, open the RVIZ and add all of the elements you want to see (like the Camera element or PointCloud2 elements). To visualize the Table detection, you will have to add **OrkTable** element. You select the topic where the table data is published, in this case, **/table_array**. You can then check certain options, like "bounding_box" to have a bounding box around the detection, or the "top" option to see what is being considered as the top of the surface.
+
+So, once you have your session or your images stored, you need to be able to always start an object recognition session with all of that stored data. To do so, you have the following options:
+
+### For saved sessions in my_object_recognition_pkg, in the directory saved_pictures2d:
+
+<launch>
+    <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
+	<!-- Nodes -->
+	<node name="find_object_2d" pkg="find_object_2d" type="find_object_2d" output="screen">
+		<remap from="image" to="$(arg camera_rgb_topic)"/>
+		<param name="gui" value="true" type="bool"/>
+		<param name="session_path" value="$(find my_object_recognition_pkg)/saved_pictures2d/coke_session.bin" type="str"/>
+		<param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
+	</node>
+
+</launch>
+<launch>
+    <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
+    <!-- Nodes -->
+    <node name="find_object_2d" pkg="find_object_2d" type="find_object_2d" output="screen">
+        <remap from="image" to="$(arg camera_rgb_topic)"/>
+        <param name="gui" value="true" type="bool"/>
+        <param name="session_path" value="$(find my_object_recognition_pkg)/saved_pictures2d/coke_session.bin" type="str"/>
+        <param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
+    </node>
+​
+</launch>
+
+### For saved images in my_object_recognition_pkg, in the directory saved_pictures2d:
+
+<launch>
+    <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
+    <!-- Nodes -->
+    <node name="find_object_2d" pkg="find_object_2d" type="find_object_2d" output="screen">
+        <remap from="image" to="$(arg camera_rgb_topic)"/>
+        <param name="gui" value="true" type="bool"/>
+        <param name="objects_path" value="$(find my_object_recognition_pkg)/saved_pictures2d" type="str"/>
+        <param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
+    </node>
+​
+</launch>
+
+More Info:
+http://wiki.ros.org/find_object_2d
+http://introlab.github.io/find-object/
+
+### Move and Spawn objects
+You have to test your object_recognition system with the same object in different positions, or even in movement.
+You also need to test it with various objects in the scene to be sure that it doesn't mistake a human head with a coke.
+Here you are going to learn how to move objects around in a Gazebo scene, and spawn new ones also.
+
+To make an object move in a scene, there are 2 steps:
+
+* **Make the object movable in the Gazebo:** For that, you will use the move_model.launch from our spawn_robot_tools_pkg.This makes a topic called "name_object/cmd_vel" available on which you can then publish and move the model around.
+* **Publish in the correct topic:** To move the object through the keyboard
