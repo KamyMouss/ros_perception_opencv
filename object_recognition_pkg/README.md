@@ -27,7 +27,7 @@ So, once you have your session or your images stored, you need to be able to alw
 
 ### For saved sessions in my_object_recognition_pkg, in the directory saved_pictures2d:
 
-<launch>
+`<launch>
     <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
 	<!-- Nodes -->
 	<node name="find_object_2d" pkg="find_object_2d" type="find_object_2d" output="screen">
@@ -37,22 +37,11 @@ So, once you have your session or your images stored, you need to be able to alw
 		<param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
 	</node>
 
-</launch>
-<launch>
-    <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
-    <!-- Nodes -->
-    <node name="find_object_2d" pkg="find_object_2d" type="find_object_2d" output="screen">
-        <remap from="image" to="$(arg camera_rgb_topic)"/>
-        <param name="gui" value="true" type="bool"/>
-        <param name="session_path" value="$(find my_object_recognition_pkg)/saved_pictures2d/coke_session.bin" type="str"/>
-        <param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
-    </node>
-​
-</launch>
+</launch>`
 
 ### For saved images in my_object_recognition_pkg, in the directory saved_pictures2d:
 
-<launch>
+`<launch>
     <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
     <!-- Nodes -->
     <node name="find_object_2d" pkg="find_object_2d" type="find_object_2d" output="screen">
@@ -62,7 +51,7 @@ So, once you have your session or your images stored, you need to be able to alw
         <param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
     </node>
 ​
-</launch>
+</launch>`
 
 More Info:
 http://wiki.ros.org/find_object_2d
