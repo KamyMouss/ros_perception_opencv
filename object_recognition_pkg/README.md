@@ -13,11 +13,11 @@ The package uses a binary called detection with a configuration file as the argu
 
 Of all the parameters you have here, the only ones that are relevant most of the time are the following ones:
 
-rgb_frame_id: '/head_camera_rgb_optical_frame'
-rgb_image_topic: '/head_camera/rgb/image_raw'
-rgb_camera_info: '/head_camera/rgb/camera_info'
-depth_image_topic: '/head_camera/depth_registered/image_raw'
-depth_camera_info: '/head_camera/depth_registered/camera_info'
+* rgb_frame_id: '/head_camera_rgb_optical_frame'
+* rgb_image_topic: '/head_camera/rgb/image_raw'
+* rgb_camera_info: '/head_camera/rgb/camera_info'
+* depth_image_topic: '/head_camera/depth_registered/image_raw'
+* depth_camera_info: '/head_camera/depth_registered/camera_info'
 
 This sets the correct image topics as inputs so that the recognition can be made
 
