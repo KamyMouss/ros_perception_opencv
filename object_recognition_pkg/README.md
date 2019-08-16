@@ -27,31 +27,11 @@ So, once you have your session or your images stored, you need to be able to alw
 
 ### For saved sessions in my_object_recognition_pkg, in the directory saved_pictures2d:
 
-`<launch>
-    <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
-	<!-- Nodes -->
-	<node name="find_object_2d" pkg="find_object_2d" type="find_object_2d" output="screen">
-		<remap from="image" to="$(arg camera_rgb_topic)"/>
-		<param name="gui" value="true" type="bool"/>
-		<param name="session_path" value="$(find my_object_recognition_pkg)/saved_pictures2d/coke_session.bin" type="str"/>
-		<param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
-	</node>
-
-</launch>`
+See *saved_session_2d.launch*.
 
 ### For saved images in my_object_recognition_pkg, in the directory saved_pictures2d:
 
-`<launch>
-    <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
-    <!-- Nodes -->
-    <node name="find_object_2d" pkg="find_object_2d" type="find_object_2d" output="screen">
-        <remap from="image" to="$(arg camera_rgb_topic)"/>
-        <param name="gui" value="true" type="bool"/>
-        <param name="objects_path" value="$(find my_object_recognition_pkg)/saved_pictures2d" type="str"/>
-        <param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
-    </node>
-​
-</launch>`
+See *saved_objects_2d.launch*.
 
 More Info:
 http://wiki.ros.org/find_object_2d
@@ -60,9 +40,29 @@ http://introlab.github.io/find-object/
 ### Move and Spawn objects
 You have to test your object_recognition system with the same object in different positions, or even in movement.
 You also need to test it with various objects in the scene to be sure that it doesn't mistake a human head with a coke.
-Here you are going to learn how to move objects around in a Gazebo scene, and spawn new ones also.
 
 To make an object move in a scene, there are 2 steps:
 
 * **Make the object movable in the Gazebo:** For that, you will use the move_model.launch from our spawn_robot_tools_pkg.This makes a topic called "name_object/cmd_vel" available on which you can then publish and move the model around.
 * **Publish in the correct topic:** To move the object through the keyboard
+
+See *make_cokecan_movable.launch* and *move_coke_keyboard.launch*.
+
+To move other objects in the scene, just change the name of the model.
+To know the name of that the model has in the Gazebo, you can ask the gazebo service:
+`rosservice call /gazebo/get_world_properties`
+
+### Spawn new objects in the scene
+This method needs you to have the sdf files of the models on your package and the whole model installed in the .gazebo/models path. These models are in the *models* directory of this package.
+
+Execute the *spawn_coke.launch* launch file to spawn the model where you wish, probably in the table location.
+For reference, the coke_can is spawned in the center of the table at XYZ = (-2.0,0.0,0.8).
+Bear in mind that if there is already an existing model with the same name, you won't be able to spawn it.
+
+So, in conclusion, to spawn an object, for example the coke_can, and make it movable at the same time, you will have to execute *spawn_ready_coke.launch*.
+
+## 3D Object Detection
+The only real difference with the 2D detection will be the sensors involved and the fact that the ObjectPoseStamped will be transformed into TFs. 
+
+You have to create another round of session photos in the 3D system because, otherwise, the detections won't work as well as they should. Especially for the TF transformations.
+
