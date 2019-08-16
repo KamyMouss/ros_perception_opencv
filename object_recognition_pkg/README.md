@@ -23,6 +23,34 @@ This sets the correct image topics as inputs so that the recognition can be made
 
 And now, open the RVIZ and add all of the elements you want to see (like the Camera element or PointCloud2 elements). To visualize the Table detection, you will have to add **OrkTable** element. You select the topic where the table data is published, in this case, **/table_array**. You can then check certain options, like "bounding_box" to have a bounding box around the detection, or the "top" option to see what is being considered as the top of the surface.
 
+More info:
+http://wg-perception.github.io/ork_tutorials/ 
+http://wg-perception.github.io/ork_tutorials/tutorial02/tutorial.html
+http://wiki.ros.org/tabletop_object_detector
+
+## 2D and 3D Object Finder
+See *start_find_object_2d.launch*.
+
+This is a basic approach to detecting objects, although you can already differentiate between objects and localize them with **object_recognition_core**. For this, you will use **find-object-2d** package.
+
+The first step is to get closer to the table to see the objects as closely as possible, for better detection.
+
+### 2D Object Finder
+You only have to set the RGB camera image source and the system is ready to go. In this case, it's **/head_camera/rgb/image_raw**. 
+
+To teach the Fetch robot to recognize a coke can., select the Edit->AddObjectFromScene. You can also add previously taken images directly. But, bear in mind that there are some peculiarities. The images appear in this objectrecogniser mirrored, if you compare them with the images from the cameras directly. So be careful with that.
+
+So in the Adding Object menu, you just have to follow the steps to select a region of the image that you consider to be the object. Once done, you should be detecting the object. This system compares the image with the saved ones and looks for matches. If it matches in enough points, it considers it the desired object.
+
+Now you can add as many objects as you want, or even turn the object around and take images from different points of view. This will make it detect the object all the time, but keep in mind that without the proper filtering, the system will consider them to be different objects.
+
+So, the last step is to save all of the objects added. There are 2 main ways:
+
+*Saving the Objects as images: File-->Save_Objects. This will save all of the images taken in a folder
+*Saving the Whole session: File-->Save_Session. This will save a binary with all of the images and settings. This is the most compact way of doing it, although you won't have access to the images of the objects. It depends on your needs
+
+You can also save the object images directly by right clicking on them, but **BEWARE** that if you do so, these images can't be used for later detection because they aren't mirrored, therefore, the recognition won't work. You can see an example of it here. It's the same image, but one is the manually saved version that is not mirrored and isn't detected, while the other one is correctly saved.
+
 So, once you have your session or your images stored, you need to be able to always start an object recognition session with all of that stored data. To do so, you have the following options:
 
 ### For saved sessions in my_object_recognition_pkg, in the directory saved_pictures2d:
