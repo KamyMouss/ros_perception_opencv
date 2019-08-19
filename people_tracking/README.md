@@ -1,4 +1,5 @@
 ## To Launch
+See notes for the various applications.
 
 ## Notes
 
