@@ -99,3 +99,13 @@ So, in conclusion, to spawn an object, for example the coke_can, and make it mov
 The only real difference with the 2D detection will be the sensors involved and the fact that the ObjectPoseStamped will be transformed into TFs.
 
 You have to create another round of session photos in the 3D system because, otherwise, the detections won't work as well as they should. Especially for the TF transformations.
+
+See: *start_find_object_3d_session.launch*
+
+Launching this, you should then get the TF of the object detected published. If you have multiple images of the same object,you will get multiple frames of objects. It's up to you to filter them.
+
+You can also see the object detected by executing the following command in another terminal while the prior launch is working:
+
+`rosrun find_object_2d print_objects_detected`
+
+The TFs appearing can be lowered by decreasing the time you consider a TF obsolete. Because most of these TFs are from previous detections that stay there for a while until they are old enough to be considered irrelevant.
