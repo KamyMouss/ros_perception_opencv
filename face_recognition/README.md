@@ -12,9 +12,9 @@ For this, you will use the **face_recognition** python module.
 
 It has many features apart from the FaceRecognition feature, like face finding or applying digital makeup. But it gives a very simple way of doing a rudimentary face recognition. Here you have an example of how to recognise _one face_.
 
-# Comments on recogize_face.py
+### Comments on recogize_face.py
 
-```
+```python
 import cv2
 import face_recognition
 from cv_bridge import CvBridge, CvBridgeError
@@ -24,7 +24,7 @@ import rospkg
 
 You will need these special packages, like **cv2** (OpenCV), **cv_bridge** (CV_Bridge), and **face_recognition** to be able to recognize the faces. You will also need rospkg in order to easily find files that are inside other ROS packages.
 
-```
+```python
 # get an instance of RosPack with the default search paths
 rospack = rospkg.RosPack()
 # get the file path for face_recognition_pkg
@@ -34,14 +34,14 @@ print self.path_to_package
 
 Then, you need to **retrieve an image** of the person that you want to recognise. **It is important to note** that by giving only one image, the face recognition system won't make positive detections unless what it visualizes is very similar to the image provided. So, the more images you provide using different configurations, the better the detections will be. Anyways, one image is more than enough.
 
-```
+```python
 # Load a sample picture and learn how to recognize it.
 image_path = os.path.join(self.path_to_package,"scripts/standing_person.png")
 ```
 
 Once you have that, it starts the real image processing:
 
-```
+```python
 standing_person_image = face_recognition.load_image_file(image_path)
 standing_person_face_encoding = face_recognition.face_encodings(standing_person_image)[0]
 ```
@@ -54,7 +54,7 @@ It has to be a compromise between performance and functionality. If you are too 
 
 With smaller image, it will be difficult for the algorithm to work, so you will have to get closer.
 
-```
+```python
 # Initialize some variables
 face_locations = []
 face_encodings = []
@@ -67,7 +67,7 @@ small_frame = cv2.resize(video_capture, (0, 0), fx=0.5, fy=0.5)
 
 Then we process the image frame. Bear in mind that, here, you are processing every other frame. This, again, is to reduce the number of images to be processed, making the recognition faster.
 
-```
+```python
 # Only process every other frame of video to save time
 if process_this_frame:
     # Find all the faces and face encodings in the current frame of video
@@ -94,7 +94,7 @@ Then, for all the faces detected and, therefore, encodings, you compare those en
 
 Finally, you display the results of the face recognition. This means showing the image captured and the locations where you detected a face, and draw a square with the name of the recognised face there.
 
-```
+```python
 # Display the results
 for (top, right, bottom, left), name in zip(face_locations, face_names):
     # Scale back up face locations since the frame we detected in was scaled to 1/2 size
